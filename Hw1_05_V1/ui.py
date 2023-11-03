@@ -13,13 +13,32 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PIL import Image
 from PIL.ImageQt import ImageQt
-
 from scipy import signal
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import matplotlib.pyplot as plt
+import numpy
+import tensorflow as tf
+from keras.datasets import cifar10
+import random
+import os
+import cv2
+import numpy as np
+from keras.applications.vgg19 import VGG19
+from PIL import Image
+from tensorflow import keras
+from keras.applications.vgg19 import preprocess_input, decode_predictions
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.preprocessing.image import img_to_array
+from keras.applications.vgg19 import preprocess_input, decode_predictions
+import PIL.Image as Image
+import os
+import torchvision
+import matplotlib.pyplot as plt
+import numpy as np
+import warnings
+from torchvision import transforms
+from torchvision.transforms import functional as TF
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -141,12 +160,6 @@ class Ui_MainWindow(object):
 
     def onButtonClick2(self):  # 5-1 Show Images
         print('Now Loading...')
-        import matplotlib.pyplot as plt
-        import numpy
-        import tensorflow as tf
-        from keras.datasets import cifar10
-        import numpy as np
-        import random
 
         labels = {0: "airplane", 1: "automobile", 2: "bird", 3: "cat", 4: "deer",
                   5: "dog", 6: "frog", 7: "horse", 8: "ship", 9: "truck"}
@@ -169,28 +182,12 @@ class Ui_MainWindow(object):
         plt.show()
 
     def onButtonClick3(self):  # 5-2 Show Model Structure
-        import os
-        import cv2
-        import numpy as np
-        from keras.applications.vgg19 import VGG19
-        from keras.applications.vgg16 import VGG16
-        import tensorflow
-        from PIL import Image
-        from tensorflow import keras
-        from keras.applications.vgg19 import preprocess_input, decode_predictions
         print('Now Loading...')
         model_VGG19 = keras.models.load_model('vgg19_pretrain.h5')
         model_VGG19.summary()
 
     def onButtonClick4(self):  # 5-3 Show Data Augmentation
-        import PIL.Image as Image
-        import os
-        import torchvision
-        import matplotlib.pyplot as plt
-        import numpy as np
-        import warnings
-        from torchvision import transforms
-        from torchvision.transforms import functional as TF
+
         print('Now Loading...')
         imagepath = self.img
         warnings.filterwarnings("ignore")
@@ -242,21 +239,11 @@ class Ui_MainWindow(object):
         cv2.waitKey(0)
 
     def onButtonClick6(self):  # 5-5 Inference
-        import os
-        import cv2
-        import numpy as np
-        from keras.applications.vgg19 import VGG19
-        from keras.applications.vgg16 import VGG16
-        import tensorflow
-        from PIL import Image
-        from tensorflow import keras
-        from tensorflow.keras.preprocessing import image
-        from tensorflow.keras.preprocessing.image import img_to_array
-        from keras.applications.vgg19 import preprocess_input, decode_predictions
+
         print('Now Loading...')
         model_VGG19 = keras.models.load_model('vgg19_pretrain.h5')
         img_path = self.img
-        # 将图像转换为网络需要的大小，因为我们这里加载的模型都是固定输入大小224*224
+        # 将图像转换为网络需要的大小，固定输入大小224*224
         img = image.load_img(img_path, target_size=(32, 32))
         # 首先需要转换为向量的形式
         img = image.img_to_array(img)
@@ -265,7 +252,6 @@ class Ui_MainWindow(object):
         # 对输入的图像进行处理
         img_out = preprocess_input(img)
         # decode the results into a list of tuples (class, description, probability)
-        # (one such list for each sample in the batch)
         # 上面这段话的意思是输出包括（类别，图像描述，输出概率）
         preds = model_VGG19.predict(img_out)
         # 输出前三个结果的可能性
