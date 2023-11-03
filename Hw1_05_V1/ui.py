@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PIL import Image
-from PIL.ImageQt import ImageQt
+#from PIL.ImageQt import ImageQt
 from scipy import signal
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -25,17 +25,13 @@ import os
 import cv2
 import numpy as np
 from keras.applications.vgg19 import VGG19
-from PIL import Image
 from tensorflow import keras
 from keras.applications.vgg19 import preprocess_input, decode_predictions
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.preprocessing.image import img_to_array
 from keras.applications.vgg19 import preprocess_input, decode_predictions
-import PIL.Image as Image
-import os
 import torchvision
 import matplotlib.pyplot as plt
-import numpy as np
 import warnings
 from torchvision import transforms
 from torchvision.transforms import functional as TF
