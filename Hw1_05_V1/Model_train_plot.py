@@ -16,10 +16,8 @@ from keras.utils import get_file
 import matplotlib.pyplot as plt
 
 num_classes = 10
-#batch_size = 128
-batch_size = 2
-#epochs = 30
-epochs = 2
+batch_size = 128
+epochs = 30
 iterations = 391
 dropout = 0.5
 weight_decay = 0.0001
